@@ -35,26 +35,26 @@ public class ProductController {
 
     @ResponseBody
     @RequestMapping(value = "/produtos", method = POST, produces = "application/json")
-    public ResponseEntity<?> add(@RequestBody Product product) {
+    public String add(@RequestBody Product product) {
         ProductDAO dao = new ProductDAO();
         dao.insert(product);
-        return ResponseEntity.ok().build();
+        return "{ \"resposta\": \"Registro inserido com Sucesso!\" }";
     }
 
     @ResponseBody
     @RequestMapping(value = "/produtos/{id}", method = PUT, produces = "application/json")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Product product) {
+    public String update(@PathVariable Long id, @RequestBody Product product) {
         ProductDAO dao = new ProductDAO();
         product.setId(id);
         dao.update(product);
-        return ResponseEntity.ok().build();
+        return "{ \"resposta\": \"Registro atualizado com Sucesso!\" }";
     }
 
     @ResponseBody
     @RequestMapping(value = "/produtos/{id}", method = DELETE, produces = "application/json")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id) {
         ProductDAO dao = new ProductDAO();
         dao.deleteById(id);
-        return ResponseEntity.ok().build();
+        return "{ \"resposta\": \"Registro excluído com Sucesso!\" }";
     }
 }
